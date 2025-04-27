@@ -14,7 +14,8 @@
         "laravel/tinker": "^2.10.1",
         "laravel/ui": "^4.6",
         "league/flysystem-aws-s3-v3": "^3.29",
-        "mongodb/laravel-mongodb": "^5.2"
+        "mongodb/mongodb": "^1.15",
+        "mongodb/laravel-mongodb": "^5.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
