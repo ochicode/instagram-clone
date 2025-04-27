@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3 text-center">
-            <img src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : 'https://via.placeholder.com/150' }}" class="rounded-circle w-100" style="max-width: 150px;">
+            <img src="{{ $user->profile_image ? Storage::disk('s3')->temporaryUrl($user->profile_image, now()->addHour()) : 'https://avatar.iran.liara.run/public' }}" class="rounded-circle w-100" style="max-width: 150px;">
         </div>
         <div class="col-md-9">
             <div class="d-flex align-items-center">
@@ -29,7 +29,7 @@
         @foreach($user->posts as $post)
             <div class="col-md-4 mb-4">
                 <a href="{{ route('posts.show', $post->id) }}">
-                  <img src="{{ asset('storage/' . $post->image_path) }}" class="w-100">
+                  <img src="{{ Storage::disk('s3')->temporaryUrl($post->image_path, now()->addHour()) }}" class="w-100">
                 </a>
             </div>
         @endforeach
