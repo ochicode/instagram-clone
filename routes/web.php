@@ -7,7 +7,13 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
 
-Route::get('/', [PostController::class, 'index'])->middleware('auth')->name('home');
+Route::get('/', [PostController::class, 'index'])
+    ->middleware('auth')
+    ->name('home');
+
+Route::get('/home', function () {
+    return redirect('/');
+})->name('home');
 
 Auth::routes();
 
