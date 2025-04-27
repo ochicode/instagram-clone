@@ -44,9 +44,11 @@ class ProfileController extends Controller
         if ($request->hasFile('profile_image')) {
             //delete the old profile image if it exists
             if ($user->profile_image) {
-                Storage::disk('public')->delete($user->profile_image);
+                Storage::disk('s3')->delete($user->profile_image);
             }
-            $imagePath = $request->file('profile_image')->store('uploads', 'public');
+            // Store the image on the 's3' disk in the 'uploads' directory
+            $imagePath = $request->file('profile_image')->store('uploads', 's3');
+
             $data['profile_image'] = $imagePath;
         }
         $user->update($data);

@@ -32,7 +32,8 @@ class PostController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $imagePath = $request->file('image')->store('uploads', 'public');
+        // Store the image on the 's3' disk in the 'uploads' directory with public visibility
+        $imagePath = $request->file('image')->store('uploads', 's3');
 
         Post::create([
             'caption' => $data['caption'],
@@ -87,7 +88,7 @@ class PostController extends Controller
             abort(403, 'Unauthorized action.');
         }
         //delete the image from the storage
-        Storage::disk('public')->delete($post->image_path);
+        Storage::disk('s3')->delete($post->image_path);
 
         //delete the post
         $post->delete();
